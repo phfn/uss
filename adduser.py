@@ -18,10 +18,13 @@ def add_ssh_key(user):
     pass
 
 
+def run(cmd: str):
+    print(cmd)
+    return system(cmd)
 def add_user(user: str):
-    groups = f"{user},docker,sudo"
-    system(f"sudo useradd --create-home --groups {groups}")
-    system(f"passwd {user}")
+    groups = "docker,sudo"
+    cmd(f"sudo useradd --create-home --groups {groups}")
+    cmd(f"passwd {user}")
     add_ssh_key(user)
 
 
