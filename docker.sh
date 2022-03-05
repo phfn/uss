@@ -21,3 +21,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 # Install docker-compose
 ./python.sh
 sudo pip install docker-compose
+
+# Add docker group 
+sudo groupadd docker
+sudo usermod -aG docker $USER
