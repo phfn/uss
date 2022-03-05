@@ -35,7 +35,7 @@ def add_user(user: str):
     groups = "docker,sudo"
     password = getpass("Please enter a password: ")
     ssh_key = input("Please past the public ssh_key:\n")
-    run(f"sudo useradd --create-home --groups {groups}")
+    run(f"sudo useradd --create-home --groups {groups} {user}")
     run("passwd", stdin=f"{password}\n{password}")
     add_ssh_key(user, ssh_key)
 
