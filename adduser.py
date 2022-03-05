@@ -25,7 +25,7 @@ def run(cmd: str, stdin = None):
         return system(f"echo \"{stdin}\" | {cmd}")
     return system(cmd)
 
-def change_password(user, pass):
+def change_password(user, password):
     proc = Popen("chpasswd user")
     proc.stdin.write("pass")
 
