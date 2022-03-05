@@ -1,12 +1,6 @@
 #!/bin/python3
 from argparse import ArgumentParser
-# from subprocess import run
 from os import system, makedirs
-
-def run(args):
-    for arg in args:
-        print(arg, end=" ")
-    print()
 
 def parse_args():
     parser = ArgumentParser()
@@ -25,13 +19,9 @@ def add_ssh_key(user):
 
 
 def add_user(user: str):
-    groups = ["docker"]
-    groups_str = "user"
-    for group in groups:
-        groups_str += "," + group
-
-    run(f"sudo useradd --create-home --groups {groups_str}".split(" ")  )
-    run(f"passwd {user}".split(" "))
+    groups = f"{user},docker,sudo"
+    system(f"sudo useradd --create-home --groups {groups}")
+    system(f"passwd {user}")
     add_ssh_key(user)
 
 
