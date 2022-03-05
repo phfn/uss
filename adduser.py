@@ -1,7 +1,7 @@
 #!/bin/python3
 from argparse import ArgumentParser
 # from subprocess import run
-from os import system
+from os import system, makedirs
 
 def run(args):
     for arg in args:
@@ -16,7 +16,8 @@ def parse_args():
 
 def add_ssh_key(user):
     ssh_key = input("Please past the public ssh_key:\n")
-    with open(f"/home/{user}/.ssh/authorized_hosts", "a") as file:
+    makedirs(f"/home/{user}/.ssh")
+    with open(f"/home/{user}/.ssh/authorized_keys", "w+") as file:
         file.write("\n")
         file.write(ssh_key)
 
