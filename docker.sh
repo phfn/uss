@@ -18,3 +18,6 @@ echo \
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 
+# Install docker-compose
+./python.sh
+sudo pip install docker-compose
