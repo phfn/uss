@@ -18,10 +18,8 @@ echo \
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 
-# Install docker-compose
-./python.sh
 sudo pip install docker-compose
 
-# Add docker group 
-sudo groupadd docker
-sudo usermod -aG docker $USER
+echo "make shure everyone who would use docker is in group docker"
+echo "Add by running:"
+echo "sudo usermod -aG docker \$USER"
