@@ -1,13 +1,15 @@
 #!/bin/python3
 from argparse import ArgumentParser
-from os import system, makedirs
+from os import system, makedirs, getuid
 from getpass import getpass
 from subprocess import Popen
 from crypt import crypt
 
+def is_root():
+    return getuid()==0
+
 def parse_args():
     parser = ArgumentParser()
-    # parser.add_argument("user", help="user to add")
     parser.add_argument("users", nargs="+", help="Users to add")
     return parser.parse_args()
 
@@ -30,13 +32,18 @@ def add_user(user: str):
     groups = "docker,sudo"
     password = getpass("Please enter a password: ")
     ssh_key = input("Please past the public ssh_key:\n")
-    run(f"sudo useradd --create-home --groups {groups} --shell /bin/bash {user}")
+    run(f"useradd --create-home --groups {groups} --shell /bin/bash {user}")
     run(f"echo \"{user}:{password}\" | chpasswd", print = False)
     add_ssh_key(user, ssh_key)
 
 
 def main():
     args = parse_args()
+
+    if not is_root():
+        print("Please use this script ad root")
+        exit(1)
+
     for user in args.users:
         add_user(user)
 
