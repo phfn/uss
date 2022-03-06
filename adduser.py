@@ -2,8 +2,6 @@
 from argparse import ArgumentParser
 from os import system, makedirs, getuid
 from getpass import getpass
-from subprocess import Popen
-from crypt import crypt
 
 def run(cmd: str):
     print(cmd)
@@ -12,6 +10,7 @@ def run(cmd: str):
 if getuid()!=0:
     print("Please use this script as root")
     exit(1)
+
 parser = ArgumentParser()
 parser.add_argument("users", nargs="+", help="Users to add")
 args = parser.parse_args()
@@ -23,7 +22,7 @@ for user in args.users:
     ssh_key = input("Please past the public ssh_key:\n")
 
     run(f"useradd --create-home --groups {groups} --shell /bin/bash {user}")
-    run(f"echo \"{user}:{password}\" | chpasswd", should_print = False)
+    system(f"echo \"{user}:{password}\" | chpasswd")
 
     makedirs(f"/home/{user}/.ssh", exist_ok=True)
     with open(f"/home/{user}/.ssh/authorized_keys", "w+") as file:
