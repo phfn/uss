@@ -10,7 +10,7 @@ def is_root():
 
 def parse_args():
     parser = ArgumentParser()
-    parser.add_argument("users", nargs="+", help="Users to add")
+    parser.add_argument("users", nargs="+", help="Users to add", required=False)
     return parser.parse_args()
 
 def add_ssh_key(user, ssh_key):
@@ -21,7 +21,7 @@ def add_ssh_key(user, ssh_key):
 
 
 def run(cmd: str, should_print = True):
-    if print:
+    if should_print:
         print(cmd)
     return system(cmd)
 
