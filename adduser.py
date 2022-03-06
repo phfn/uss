@@ -17,11 +17,10 @@ def add_ssh_key(user, ssh_key):
         file.write("\n")
         file.write(ssh_key)
 
-    pass
 
-
-def run(cmd: str):
-    print(cmd)
+def run(cmd: str, print = True):
+    if print:
+        print(cmd)
     return system(cmd)
 
 
@@ -30,9 +29,9 @@ def run(cmd: str):
 def add_user(user: str):
     groups = "docker,sudo"
     password = getpass("Please enter a password: ")
-    crypted_pass = crypt(password)
     ssh_key = input("Please past the public ssh_key:\n")
-    run(f"sudo useradd --create-home --groups {groups} --password {crypted_pass} --shell /bin/bash {user}")
+    run(f"sudo useradd --create-home --groups {groups} --shell /bin/bash {user}")
+    run(f"echo \"{user}:{password}\" | chpasswd")
     add_ssh_key(user, ssh_key)
 
 
