@@ -18,7 +18,7 @@ def add_ssh_key(user, ssh_key):
         file.write(ssh_key)
 
 
-def run(cmd: str, print = True):
+def run(cmd: str, should_print = True):
     if print:
         print(cmd)
     return system(cmd)
