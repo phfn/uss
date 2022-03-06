@@ -33,7 +33,7 @@ def add_user(user: str):
     password = getpass("Please enter a password: ")
     ssh_key = input("Please past the public ssh_key:\n")
     run(f"useradd --create-home --groups {groups} --shell /bin/bash {user}")
-    run(f"echo \"{user}:{password}\" | chpasswd", print = False)
+    run(f"echo \"{user}:{password}\" | chpasswd", should_print = False)
     add_ssh_key(user, ssh_key)
 
 
@@ -41,7 +41,7 @@ def main():
     args = parse_args()
 
     if not is_root():
-        print("Please use this script ad root")
+        print("Please use this script as root")
         exit(1)
 
     for user in args.users:
