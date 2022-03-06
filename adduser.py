@@ -29,6 +29,7 @@ def run(cmd: str, should_print = True):
 
 
 def add_user(user: str):
+    print(f"Adding user {user}")
     groups = "docker,sudo"
     password = getpass("Please enter a password: ")
     ssh_key = input("Please past the public ssh_key:\n")
