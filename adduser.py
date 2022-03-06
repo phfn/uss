@@ -31,7 +31,7 @@ def add_user(user: str):
     password = getpass("Please enter a password: ")
     ssh_key = input("Please past the public ssh_key:\n")
     run(f"sudo useradd --create-home --groups {groups} --shell /bin/bash {user}")
-    run(f"echo \"{user}:{password}\" | chpasswd")
+    run(f"echo \"{user}:{password}\" | chpasswd", print = False)
     add_ssh_key(user, ssh_key)
 
 
